@@ -15,9 +15,11 @@ class PostFactory extends Factory
         return [
             'title' => $this->faker->word(),
             'author' => $this->faker->name(),
-            'content' => $this->faker->text('350'),
+            'content' => $this->faker->text(350),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
+            'category' => $this->faker->word(),
+            'tags' => json_encode($this->faker->words(3)),
         ];
     }
 }

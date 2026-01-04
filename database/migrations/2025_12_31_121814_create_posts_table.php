@@ -9,9 +9,24 @@ return new class extends Migration {
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
+
             $table->string('title');
-            $table->string('author');
+
+            $table->foreignId('author')
+                ->constrained('users', 'id')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
             $table->longText('content');
+
+            $table->foreignId('category')
+                ->nullable()
+                ->constrained('categories', 'id')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
+            $table->json('tags')->nullable();
+
             $table->timestamps();
         });
     }
