@@ -1,6 +1,7 @@
 @section('title', 'Perfil')
 
 <x-layout>
+    <div x-data="{ showPosts: false }">
         <header class="bg-gray-50">
             <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
                 <div class="sm:flex sm:items-center sm:justify-between">
@@ -34,6 +35,7 @@
                         <button
                             class="block rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring"
                             type="button"
+                            @click="showPosts = !showPosts"
                         >
                             Suas publicações
                         </button>
@@ -48,5 +50,18 @@
                 </div>
             </div>
         </header>
+
+        <div x-show.important="showPosts">
+            <x-posts.user-posts :posts="$posts" x-transition />
+        </div>
+
+        <div x-show.important="!showPosts"
+             class="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 flex items-center justify-center">
+            <div class="mx-auto max-w-lg text-center">
+                <h2 class="text-2xl font-bold text-gray-900 sm:text-3xl mb-4">Bem-vindo ao seu perfil!</h2>
+                <p class="text-gray-700">Aqui você pode gerenciar suas informações pessoais e visualizar suas
+                    publicações.</p>
+            </div>
+        </div>
     </div>
 </x-layout>
